@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity{
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-
         tv.setText(getStringFromJNI());
+
         System.out.println("修改前：" + key);
         this.accessField();
         System.out.println("修改后：" + key);
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity{
         accessNonvirtualMethod();
         System.out.println(accessChineseChars("刘涛"));
 
-        /*int[] array = {1, 20, 11, 55, 90, 100, 5, 70};
-        putArray(array);
+        int[] array = {1, 20, 11, 55, 90, 100, 5, 70};
+        /*putArray(array);
         //如果不加同步代码，这里打印出来的还是未排序的
         for (int i = 0; i < array.length; i++) {
             System.out.println("Java " + array[i]);

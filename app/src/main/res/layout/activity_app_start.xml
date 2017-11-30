@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnBasic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mCryption"
+        android:text="基础知识" />
+
+    <Button
+        android:id="@+id/btnEncryptor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="文件的加密与解密"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnPatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="文件的拆分与合并"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

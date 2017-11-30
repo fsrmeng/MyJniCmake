@@ -8,6 +8,8 @@
 #include <string.h>
 #include <android/log.h>
 
+#define LOGD(FORMAT,...) __android_log_print(ANDROID_LOG_DEBUG,"zp",FORMAT,##__VA_ARGS__);
+
 char password[] = "ChinaIsPowerful";
 //加密
 JNIEXPORT void JNICALL
@@ -16,13 +18,13 @@ Java_com_zhangpan_myjnicmake_Encryptor_cryption(JNIEnv *env, jclass jcla, jstrin
     char* normal_path = (*env)->GetStringUTFChars(env, normal_path_jstr, NULL);
     char* crypt_path = (*env)->GetStringUTFChars(env, crypt_path_jstr, NULL);
 
-    __android_log_print(ANDROID_LOG_DEBUG, "system.out", "%s", normal_path);
+    LOGD("%s", normal_path);
     //打开文件
     FILE* nomal_fp = fopen(normal_path, "rb");
     FILE* crypt_fp = fopen(crypt_path, "wb");
 
     if (nomal_fp == NULL) {
-        __android_log_print(ANDROID_LOG_DEBUG, "system.out", "文件打开失败");
+        LOGD("%s", "文件打开失败");
         return;
     }
 

@@ -3,11 +3,12 @@
 //
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "jni.h"
 #include <string.h>
 #include <stdio.h>
 #include <android/log.h>
 #include <stdlib.h>
+#include<stdarg.h>
+#include <jni.h>
 
 JNIEXPORT jstring JNICALL
 Java_com_zhangpan_myjnicmake_MainActivity_getStringFromJNI(
@@ -26,24 +27,26 @@ Java_com_zhangpan_myjnicmake_MainActivity_getStringFromJNI(
 
 //基本数据类型
 /*
-boolean  jboolean;
-byte     jbyte;
-char     jchar;
-short    jshort;
-int      jint;
-long     jlong;
-float    jfloat;
-double   jdouble;
-void     void
+boolean     jboolean;
+byte        jbyte;
+char        jchar;
+short       jshort;
+int         jint;
+long        jlong;
+float       jfloat;
+double      jdouble;
+void        void
 */
 
 //引用类型(对象)
-//String jstring
-//Object jobject
-//数组，基本数据类型的数组
-//byte[] jByteArray
+/*
+    String                  jstring
+    Object                  jobject
+//基本数据类型的数组
+    byte[]               jByteArray
 //对象数组
-//Object[](String[]) jobjectArray
+Object[](String[])      jobjectArray
+*/
 
 //C/C++访问Java的成员
 //访问非静态属性
@@ -104,13 +107,6 @@ Java_com_zhangpan_myjnicmake_MainActivity_accessStaticMethod(JNIEnv *env, jobjec
     jstring uuid = (*env)->CallStaticObjectMethod(env, jcla, jmid);
     char* uuid_str = (*env)->GetStringUTFChars(env, uuid, NULL);
     __android_log_print(ANDROID_LOG_DEBUG, "system.out", "uuid_str：%ld", uuid_str);
-
-    //以下代码不知道为什么不对
-    /*char filename[100];
-    sprintf(filename, "D://%s.txt", uuid_str);
-    FILE* file = fopen(filename, "w");
-    fputs("I Love China", file);
-    fclose(file);*/
 }
 
 //访问构造方法
@@ -173,11 +169,6 @@ Java_com_zhangpan_myjnicmake_MainActivity_putArray(JNIEnv *env, jobject jobj, ji
     //排序
     qsort(arr, arrLength, sizeof(jint), commpare);
 
-    //这里打印的是已经排序好的
-    /*jint* p = arr;
-    for (; p < arr + arrLength; p++) {
-        __android_log_print(ANDROID_LOG_DEBUG, "system.out", "p：%d", *p);
-    }*/
     //同步
     //0：Java数组进行更新，并且释放C/C++数组
     //JNI_ABORT：Java数组不进行更新，但是释放C/C++数组
@@ -254,7 +245,7 @@ Java_com_zhangpan_myjnicmake_MainActivity_deleteGlobalRef(JNIEnv *env, jobject i
 
 //弱全局引用
 //节省内存，在内存不足时可以释放所引用的对象
-//可以引用一个不常用的对象，如果为NULL，临时创建
+//可以引用一个不常用的对象，如果为NULL（被回收了），可以手动临时创建一个
 //创建：NewWeakGlobalRef，销毁：DeleteGlobalWeakRef
 
 //异常处理

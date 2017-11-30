@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <android/log.h>
 
-#define Logd(...) __android_log_print(ANDROID_LOG_DEBUG, __VA_ARGS__)
+#define LOGD(FORMAT, ...) __android_log_print(ANDROID_LOG_DEBUG, "zp", FORMAT, ##__VA_ARGS__)
+
 //
 // Created by zp on 2017/11/1.
 //
@@ -40,8 +41,7 @@ Java_com_zhangpan_myjnicmake_FilePatchUtil_split(JNIEnv *env, jclass jcla, jstri
         // /storage/emulated/0/AS_3.avi
         // /storage/emulated/0/AS_4.avi
         sprintf(patches[i], path_pattern, (i+1));
-        Logd("zhangpan", "split path %s", patches[i]);
-//        __android_log_print(ANDROID_LOG_DEBUG, "zhangpan", "split path：%s", patches[i]);
+        LOGD("%s", patches[i]);
     }
 
     //不断读取path文件，循环写入file_count个文件中
@@ -109,8 +109,8 @@ Java_com_zhangpan_myjnicmake_FilePatchUtil_merge(JNIEnv *env, jclass jcla, jstri
     for (; i < file_count; i++) {
         patches[i] = malloc(sizeof(char) * 100);
         sprintf(patches[i], path_pattern, (i+1));
-//        __android_log_print(ANDROID_LOG_DEBUG, "zhangpan", "merge path：%s", patches[i]);
-        Logd("zhangpan", "merge path %s", patches[i]);
+//        __android_log_print(ANDROID_LOG_DEBUG, "zp", "%s", patches[i]);
+        LOGD("%s", patches[i]);
         //获取每个分割后的子文件大小
         int patchFileSize = get_file_size(patches[i]);
         FILE* fpr = fopen(patches[i], "rb");

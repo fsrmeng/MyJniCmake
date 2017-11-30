@@ -12,15 +12,12 @@ import java.io.File;
 /**
  * Created by ZhangPan on 2017/10/31
  */
-
 public class FileEncryptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_encryption);
     }
-
-
 
     public void mCryption(View view) {
         String normalPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Shape@2x.png";
